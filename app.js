@@ -5,10 +5,10 @@ const ejs = require('ejs');
 const cookies= require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const signin  = require('./views/models/signup');
+const signin  = require('./models/signup');
 const { Server } = require('socket.io');
 const http = require('http');
-const goaler = require('./views/models/goal');
+const goaler = require('./models/goal');
 
 
 
@@ -134,9 +134,9 @@ app.get('/AllGoals', async function(req,res){
     res.render('All',{ goals });
 })
 
-app.get('/chat',function(req,res){
-    res.render('chat')
-})
+// app.get('/chat',function(req,res){
+//     res.render('chat')
+// })
 
 
 

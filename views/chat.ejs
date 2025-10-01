@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatter App</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            background-color: black;
+            color: white;
+        }
+        h1{
+            font-size: 25px;
+            font-family: sans-serif;
+            font-weight: 500;
+            color: aqua;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        input{
+            margin-top: 10px;
+            margin-left: 20px;
+            border: 2px solid rgb(150, 150, 150);
+            outline: none;
+            color: white;
+
+        }
+        button{
+            margin-top: 8px;
+            margin-left: 10px;
+            padding: px;
+            background-color: rgb(140, 255, 0);
+            width: 70px;
+            color: black;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Simple Chat App</h1>
+    <input type="text" id="Message" placeholder="Enter your Message">
+    <button type="submit" id="sendbtn">Send</button>
+
+    <div id="messages">
+        
+    </div>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+
+    <script>
+         const socker = io();
+         const sendbtn = document.getElementById('sendbtn');
+         const messageInput = document.getElementById('Message');
+         const almessages = document.getElementById('messages');
+
+
+     
+         socker.on('message',message => {
+            const p = document.createElement('p');
+            p.innerText = message;
+            almessages.appendChild(p);
+         });
+     
+
+         sendbtn.addEventListener('click',e => {
+            const message = messageInput.value;
+            console.log(message);
+
+            socker.emit('newmessage',message);
+            
+         })
+    
+    </script>
+
+</body>
+</html>
